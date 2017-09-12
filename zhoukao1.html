@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		.red{
+			border: 2px solid red;
+		}
+	</style>
+	<body ng-controller="myctrl">
+		<input type="text" name="" value="" ng-class="class1" ng-model="inp" style="height: 100px;"/> <br />
+		<button ng-click="fb()" >发布</button><br />
+		<ul>
+			<li ng-repeat="i in arr">{{i}}--<a href="#" ng-click="remove($index)">删除</a></li>
+		</ul>
+	</body>
+	<script src="angular.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		angular.module("app",[]).controller("myctrl",function($scope){
+			$scope.arr=["你今天学习了吗？","读万卷书，行万里路？"];
+			
+			$scope.fb = function(){
+				if($scope.inp.length>20){			
+					$scope.class1 = "class1";
+					alert("超过了"+parseInt($scope.inp.length-20)+"个字")
+				}else{
+					$scope.class1 = "class1"
+					
+					for(var s in $scope.arr){
+					if($scope.inp==$scope.arr[s]){
+						alert("内容重复");
+						$scope.inp="";
+						return
+					}
+					}
+					if($scope.inp==""){
+						$scope.class1="red"
+						
+					}else{
+						
+						
+						$scope.arr.push($scope.inp);
+					    $scope.inp="";
+					}
+					
+					
+					
+				}
+				
+				
+			}
+			$scope.remove = function($index){
+				$scope.arr.splice($index,1)
+				$scope.class1 = "class1"
+			}
+			
+			
+		})
+	</script>
+</html>
